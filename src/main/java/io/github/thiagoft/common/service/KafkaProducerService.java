@@ -6,10 +6,12 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class KafkaProducerService {
+public class KafkaProducerService implements Closeable {
 
     private KafkaProducer<String,String> producer;
 
@@ -41,6 +43,8 @@ public class KafkaProducerService {
         this.producer.send(record,callback).get();
     }
 
-
-
+    @Override
+    public void close() throws IOException {
+        this.producer.close();
+    }
 }
