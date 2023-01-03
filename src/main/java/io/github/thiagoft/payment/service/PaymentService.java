@@ -1,7 +1,7 @@
 package io.github.thiagoft.payment.service;
 
-import io.github.thiagoft.common.service.ConsumerFunction;
 import io.github.thiagoft.common.service.KafkaConsumerService;
+import io.github.thiagoft.common.service.SubscribeType;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -12,7 +12,12 @@ public class PaymentService {
 
     public static void main(String[] args) {
         var paymentService = new PaymentService();
-        var consumer = new KafkaConsumerService("ECOMMERCE_NEW_ORDER", paymentService.getProperties(), paymentService::consumeOrders);
+        var consumer = new KafkaConsumerService(
+                "ECOMMERCE_NEW_ORDER",
+                paymentService.getProperties(),
+                paymentService::consumeOrders,
+                SubscribeType.COLLECTION_LIST
+        );
         consumer.run();
     }
 
@@ -20,6 +25,7 @@ public class PaymentService {
         System.out.println("--------------------------------------------");
         System.out.println("Message sent - topic: "+record.topic()+" - partition: "+record.partition()+" - offset: "+record.offset()+" - timestamp: "+record.timestamp());
         System.out.println("Value: "+record.value());
+        System.out.println("Processing payment");
     }
 
     public Properties getProperties() {

@@ -10,16 +10,22 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 public class KafkaConsumerService implements Closeable {
 
     private final KafkaConsumer<String,String> consumer;
     private final ConsumerFunction consumerFunction;
 
-    public KafkaConsumerService(String topic, Properties properties, ConsumerFunction consumerFunction) {
+    public KafkaConsumerService(String topic, Properties properties, ConsumerFunction consumerFunction, SubscribeType subscribeType) {
         this.consumerFunction = consumerFunction;
         this.consumer = new KafkaConsumer<>(getProperties(properties));
-        this.consumer.subscribe(Collections.singletonList(topic));
+
+        switch (subscribeType) {
+            case COLLECTION_LIST -> this.consumer.subscribe(Collections.singletonList(topic));
+            case PATTERN_MATCHING -> this.consumer.subscribe(Pattern.compile(topic+".*"));
+        }
+
     }
 
     private Properties getProperties(Properties properties) {
