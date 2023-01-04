@@ -1,23 +1,21 @@
 package io.github.thiagoft.log.service;
 
 import io.github.thiagoft.common.service.KafkaConsumerService;
-import io.github.thiagoft.common.service.SubscribeType;
-import io.github.thiagoft.notification.service.NotificationService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.Properties;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class LogService {
 
     public static void main(String[] args) {
         var logService = new LogService();
         var consumer = new KafkaConsumerService(
-                "ECOMMERCE_NEW_ORDER",
+                Pattern.compile("ECOMMERCE.*"),
                 logService.getProperties(),
-                logService::consumeOrders,
-                SubscribeType.PATTERN_MATCHING
+                logService::consumeOrders
         );
     }
 

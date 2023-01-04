@@ -17,5 +17,7 @@ public class OrderService {
     public void createNewOrder() throws ExecutionException, InterruptedException {
         var kafkaProducerService = new KafkaProducerService(new Properties());
         kafkaProducerService.send("ECOMMERCE_NEW_ORDER", "123", "456");
+
+        kafkaProducerService.send("ECOMMERCE_NOTIFICATION", "123", "456");
     }
 }

@@ -1,8 +1,6 @@
 package io.github.thiagoft.inventory.service;
 
 import io.github.thiagoft.common.service.KafkaConsumerService;
-import io.github.thiagoft.common.service.SubscribeType;
-import io.github.thiagoft.payment.service.PaymentService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -16,8 +14,7 @@ public class InventoryService {
         var consumer = new KafkaConsumerService(
                 "ECOMMERCE_NEW_ORDER",
                 inventoryService.getProperties(),
-                inventoryService::consumeOrders,
-                SubscribeType.COLLECTION_LIST
+                inventoryService::consumeOrders
         );
         consumer.run();
     }

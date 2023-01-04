@@ -17,15 +17,19 @@ public class KafkaConsumerService implements Closeable {
     private final KafkaConsumer<String,String> consumer;
     private final ConsumerFunction consumerFunction;
 
-    public KafkaConsumerService(String topic, Properties properties, ConsumerFunction consumerFunction, SubscribeType subscribeType) {
+    private KafkaConsumerService(Properties properties, ConsumerFunction consumerFunction) {
         this.consumerFunction = consumerFunction;
         this.consumer = new KafkaConsumer<>(getProperties(properties));
+    }
 
-        switch (subscribeType) {
-            case COLLECTION_LIST -> this.consumer.subscribe(Collections.singletonList(topic));
-            case PATTERN_MATCHING -> this.consumer.subscribe(Pattern.compile(topic+".*"));
-        }
+    public KafkaConsumerService(String topic, Properties properties, ConsumerFunction consumerFunction) {
+        this(properties, consumerFunction);
+        this.consumer.subscribe(Collections.singletonList(topic));
+    }
 
+    public KafkaConsumerService(Pattern pattern, Properties properties, ConsumerFunction consumerFunction) {
+        this(properties, consumerFunction);
+        this.consumer.subscribe(pattern);
     }
 
     private Properties getProperties(Properties properties) {

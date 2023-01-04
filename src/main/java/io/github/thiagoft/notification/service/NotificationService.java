@@ -1,8 +1,6 @@
 package io.github.thiagoft.notification.service;
 
 import io.github.thiagoft.common.service.KafkaConsumerService;
-import io.github.thiagoft.common.service.SubscribeType;
-import io.github.thiagoft.payment.service.PaymentService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -16,8 +14,7 @@ public class NotificationService {
         var consumer = new KafkaConsumerService(
                 "ECOMMERCE_NEW_ORDER",
                 notificationService.getProperties(),
-                notificationService::consumeOrders,
-                SubscribeType.COLLECTION_LIST
+                notificationService::consumeOrders
         );
         consumer.run();
     }

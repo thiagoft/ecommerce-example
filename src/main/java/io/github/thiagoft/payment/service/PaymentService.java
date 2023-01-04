@@ -1,7 +1,6 @@
 package io.github.thiagoft.payment.service;
 
 import io.github.thiagoft.common.service.KafkaConsumerService;
-import io.github.thiagoft.common.service.SubscribeType;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -15,8 +14,7 @@ public class PaymentService {
         var consumer = new KafkaConsumerService(
                 "ECOMMERCE_NEW_ORDER",
                 paymentService.getProperties(),
-                paymentService::consumeOrders,
-                SubscribeType.COLLECTION_LIST
+                paymentService::consumeOrders
         );
         consumer.run();
     }
