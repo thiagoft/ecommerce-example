@@ -1,6 +1,7 @@
 package io.github.thiagoft.payment.service;
 
 import io.github.thiagoft.common.service.KafkaConsumerService;
+import io.github.thiagoft.common.utils.GsonDeserializer;
 import io.github.thiagoft.order.dto.Order;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -31,6 +32,7 @@ public class PaymentService {
         var properties = new Properties();
         properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, PaymentService.class.getSimpleName()+"-"+ UUID.randomUUID());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, PaymentService.class.getSimpleName());
+        properties.setProperty(GsonDeserializer.CONSUMER_TYPE,Order.class.getName());
 
         return properties;
     }

@@ -11,9 +11,11 @@ public class GsonDeserializer<T> implements Deserializer<T> {
     private final Gson gson = new Gson().newBuilder().create();
     private Class<T> type;
 
+    public static final String CONSUMER_TYPE = "CONSUMER_TYPE";
+
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        String typeName = String.valueOf(configs.get(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG));
+        String typeName = String.valueOf(configs.get(CONSUMER_TYPE));
 
         try {
             this.type = (Class<T>) Class.forName(typeName);

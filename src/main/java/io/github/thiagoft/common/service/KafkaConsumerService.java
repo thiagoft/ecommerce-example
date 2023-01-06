@@ -28,7 +28,7 @@ public class KafkaConsumerService<T> implements Closeable {
         this.consumer.subscribe(Collections.singletonList(topic));
     }
 
-    public KafkaConsumerService(Pattern pattern, Properties properties, ConsumerFunction consumerFunction) {
+    public KafkaConsumerService(Pattern pattern, Properties properties, ConsumerFunction<T> consumerFunction) {
         this(properties, consumerFunction);
         this.consumer.subscribe(pattern);
     }
