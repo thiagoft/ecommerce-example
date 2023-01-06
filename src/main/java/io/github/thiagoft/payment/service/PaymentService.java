@@ -1,6 +1,7 @@
 package io.github.thiagoft.payment.service;
 
 import io.github.thiagoft.common.service.KafkaConsumerService;
+import io.github.thiagoft.order.dto.Order;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -11,7 +12,7 @@ public class PaymentService {
 
     public static void main(String[] args) {
         var paymentService = new PaymentService();
-        var consumer = new KafkaConsumerService(
+        var consumer = new KafkaConsumerService<>(
                 "ECOMMERCE_NEW_ORDER",
                 paymentService.getProperties(),
                 paymentService::consumeOrders
@@ -19,7 +20,7 @@ public class PaymentService {
         consumer.run();
     }
 
-    public void consumeOrders(ConsumerRecord<String,String> record) {
+    public void consumeOrders(ConsumerRecord<String,Order> record) {
         System.out.println("--------------------------------------------");
         System.out.println("Message sent - topic: "+record.topic()+" - partition: "+record.partition()+" - offset: "+record.offset()+" - timestamp: "+record.timestamp());
         System.out.println("Value: "+record.value());

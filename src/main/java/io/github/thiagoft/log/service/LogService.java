@@ -12,11 +12,12 @@ public class LogService {
 
     public static void main(String[] args) {
         var logService = new LogService();
-        var consumer = new KafkaConsumerService(
-                Pattern.compile("ECOMMERCE.*"),
-                logService.getProperties(),
-                logService::consumeOrders
+        var consumer = new KafkaConsumerService<String>(
+            Pattern.compile("ECOMMERCE.*"),
+            logService.getProperties(),
+            logService::consumeOrders
         );
+        consumer.run();
     }
 
     public void consumeOrders(ConsumerRecord<String,String> record) {
