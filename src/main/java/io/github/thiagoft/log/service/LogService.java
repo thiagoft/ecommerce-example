@@ -3,6 +3,8 @@ package io.github.thiagoft.log.service;
 import io.github.thiagoft.common.service.KafkaConsumerService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 import java.util.UUID;
@@ -12,7 +14,7 @@ public class LogService {
 
     public static void main(String[] args) {
         var logService = new LogService();
-        var consumer = new KafkaConsumerService<String>(
+        var consumer = new KafkaConsumerService<>(
             Pattern.compile("ECOMMERCE.*"),
             logService.getProperties(),
             logService::consumeOrders
@@ -30,6 +32,7 @@ public class LogService {
         var properties = new Properties();
         properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, LogService.class.getSimpleName()+"-"+ UUID.randomUUID());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, LogService.class.getSimpleName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
         return properties;
     }
