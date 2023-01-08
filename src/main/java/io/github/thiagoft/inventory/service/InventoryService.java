@@ -1,6 +1,8 @@
 package io.github.thiagoft.inventory.service;
 
 import io.github.thiagoft.common.service.KafkaConsumerService;
+import io.github.thiagoft.common.utils.GsonDeserializer;
+import io.github.thiagoft.order.dto.Order;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -19,7 +21,7 @@ public class InventoryService {
         consumer.run();
     }
 
-    public void consumeOrders(ConsumerRecord<String,String> record) {
+    public void consumeOrders(ConsumerRecord<String, Order> record) {
         System.out.println("--------------------------------------------");
         System.out.println("Message sent - topic: "+record.topic()+" - partition: "+record.partition()+" - offset: "+record.offset()+" - timestamp: "+record.timestamp());
         System.out.println("Value: "+record.value());
@@ -30,6 +32,7 @@ public class InventoryService {
         var properties = new Properties();
         properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, InventoryService.class.getSimpleName()+"-"+ UUID.randomUUID());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, InventoryService.class.getSimpleName());
+        properties.setProperty(GsonDeserializer.CONSUMER_TYPE, Order.class.getName());
 
         return properties;
     }
