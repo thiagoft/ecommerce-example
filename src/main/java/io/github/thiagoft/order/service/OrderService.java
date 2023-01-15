@@ -1,16 +1,12 @@
 package io.github.thiagoft.order.service;
 
 import io.github.thiagoft.common.service.KafkaProducerService;
-import io.github.thiagoft.common.utils.GsonSerializer;
 import io.github.thiagoft.notification.dto.Notification;
 import io.github.thiagoft.order.dto.Order;
 import io.github.thiagoft.order.dto.Product;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
