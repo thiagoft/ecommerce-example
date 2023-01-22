@@ -1,4 +1,4 @@
-package io.github.thiagoft.notification.dto;
+package io.github.thiagoft.dto;
 
 import java.util.Objects;
 

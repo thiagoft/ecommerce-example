@@ -1,6 +1,6 @@
-package io.github.thiagoft.common.service;
+package io.github.thiagoft.service;
 
-import io.github.thiagoft.common.utils.GsonDeserializer;
+import io.github.thiagoft.utils.GsonDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;

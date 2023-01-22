@@ -1,4 +1,4 @@
-package io.github.thiagoft.common.service;
+package io.github.thiagoft.service;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 

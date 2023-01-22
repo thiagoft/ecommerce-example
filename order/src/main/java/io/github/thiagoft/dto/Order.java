@@ -1,4 +1,4 @@
-package io.github.thiagoft.order.dto;
+package io.github.thiagoft.dto;
 
 import java.util.List;
 import java.util.Objects;

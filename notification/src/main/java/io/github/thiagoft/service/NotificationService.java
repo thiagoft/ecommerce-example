@@ -1,8 +1,7 @@
-package io.github.thiagoft.notification.service;
+package io.github.thiagoft.service;
 
-import io.github.thiagoft.common.service.KafkaConsumerService;
-import io.github.thiagoft.common.utils.GsonDeserializer;
-import io.github.thiagoft.notification.dto.Notification;
+import io.github.thiagoft.dto.Notification;
+import io.github.thiagoft.utils.GsonDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 

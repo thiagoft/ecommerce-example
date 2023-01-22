@@ -1,9 +1,8 @@
-package io.github.thiagoft.order.service;
+package io.github.thiagoft.service;
 
-import io.github.thiagoft.common.service.KafkaProducerService;
-import io.github.thiagoft.notification.dto.Notification;
-import io.github.thiagoft.order.dto.Order;
-import io.github.thiagoft.order.dto.Product;
+import io.github.thiagoft.dto.Notification;
+import io.github.thiagoft.dto.Order;
+import io.github.thiagoft.dto.Product;
 
 import java.io.IOException;
 import java.util.List;

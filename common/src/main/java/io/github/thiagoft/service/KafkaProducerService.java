@@ -1,6 +1,6 @@
-package io.github.thiagoft.common.service;
+package io.github.thiagoft.service;
 
-import io.github.thiagoft.common.utils.GsonSerializer;
+import io.github.thiagoft.utils.GsonSerializer;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;

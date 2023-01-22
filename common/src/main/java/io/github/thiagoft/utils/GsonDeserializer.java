@@ -1,4 +1,4 @@
-package io.github.thiagoft.common.utils;
+package io.github.thiagoft.utils;
 
 import com.google.gson.Gson;
 import org.apache.kafka.common.serialization.Deserializer;
