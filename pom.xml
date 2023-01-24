@@ -12,6 +12,10 @@
         <module>common</module>
         <module>order</module>
         <module>notification</module>
+        <module>logistic</module>
+        <module>log</module>
+        <module>inventory</module>
+        <module>payment</module>
     </modules>
 
     <properties>
